@@ -134,6 +134,27 @@ commandInput.addEventListener('keydown', (event) => {
                             terminalElement.insertBefore(finalDiv, terminalElement.querySelector('.command-line'));
                             
                             break;
+                        case '2D-Design.txt':
+                            // Create a new div for the content
+                            var twoddesignDiv = document.createElement('div');
+                            twoddesignDiv.classList.add('twoddesign-div');
+
+                            // Create paragraphs for the statements
+                            var firstdraft = document.createElement('p');
+                            firstdraft.textContent = "For the first draft of my box, I decided to follow along with the example video on Panopto for how to design the 2D finger joint box. I had similar dimensions as the example video, but I chose to use a 4 finger joint and I added a lid to keep the things stored in the box safe.";
+                            twoddesignDiv.appendChild(firstdraft);
+
+                            // Create an image element
+                            const image = document.createElement('img');
+                            image.classList.add('firstdraft-img');
+                            image.src = 'Fingerbox-Sketch.png';
+                            image.alt = 'First draft sketch of my box';
+                            twoddesignDiv.appendChild(image);
+
+                            // Insert the div before the command-line div
+                            terminalElement.insertBefore(twoddesignDiv, terminalElement.querySelector('.command-line'));
+
+                            break;
                         default:
                             output = 'Nothing in these files yet.'
 
