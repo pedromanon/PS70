@@ -6,10 +6,13 @@
   padding: 10px;
 }
 
-.command-line {
+.command-line,
+.old-command-line {
   display: flex;
   align-items: center;
   white-space: nowrap;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .prompt {
@@ -25,19 +28,14 @@
   font-family: monospace;
 }
 
-.old-command-line {
-  margin-bottom: 5px;
-}
-
 .output-line {
   color: green;
   white-space: pre-wrap;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-body {
-  background-color: black;
-}
-
+/* Additional classes remain unchanged */
 .about-div {
   display: inline-flex;
   flex-wrap: nowrap;
@@ -47,7 +45,7 @@ body {
 }
 
 .about-img {
-  width: 200px;
+  width: 20%;
   padding-right: 5px;
 }
 
@@ -73,4 +71,13 @@ body {
 
 .about-p {
   padding-left: 5px;
+}
+
+body {
+  background-color: black;
+}
+
+p {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
