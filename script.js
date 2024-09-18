@@ -3,6 +3,8 @@ const terminalElement = document.querySelector('.terminal');
 let currentPrompt = document.querySelector('.prompt');
 
 let directory = '';
+let commandHistory = [];  // Array to store command history
+let historyIndex = -1;    // Index to track the command being accessed from the history
 
 commandInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
@@ -12,93 +14,62 @@ commandInput.addEventListener('keydown', (event) => {
     const value = inputs[1];
     let output = '';
 
+    // Store the command in the history array and reset historyIndex
+    if (commandInput.value.trim() !== '') {
+        commandHistory.push(commandInput.value);
+        historyIndex = -1;  // Reset index when a new command is entered
+    }
+
+    // Create a new div to store the old command line
+    const oldCommandDiv = document.createElement('div');
+    oldCommandDiv.classList.add('old-command-line');
+
+    // Append the old prompt and the inputted command
+    const oldPrompt = document.createElement('p');
+    oldPrompt.classList.add('prompt');
+    oldPrompt.textContent = `user@terminal${directory}:~ ${commandInput.value}`;
+    oldCommandDiv.appendChild(oldPrompt);
+
+    terminalElement.insertBefore(oldCommandDiv, terminalElement.querySelector('.command-line'));
+
+    // Clear the input field for the new command
+    commandInput.value = '';
+
     switch (command) {
         case 'help':
-            // Create a new div for the content
-            var helpDiv = document.createElement('div');
-            helpDiv.classList.add('help-div');
-
-            // Create paragraphs for the statements
-            var statement1 = document.createElement('p');
-            statement1.textContent = "These are the commands necessary to navigate the website.";
-            helpDiv.appendChild(statement1);
-
-            var statement2 = document.createElement('p');
-            statement2.textContent = "  -- help: this command will let you know of the commands necessary to navigate the website.";
-            helpDiv.appendChild(statement2);
-
-            var statement3 = document.createElement('p');
-            statement3.textContent = "  -- ls: this command will show you the files and folders in the current directory.";
-            helpDiv.appendChild(statement3);
-
-            var statement4 = document.createElement('p');
-            statement4.textContent = "  -- clear: this command will clear the terminal screen.";
-            helpDiv.appendChild(statement4);
-
-            var statement5 = document.createElement('p');
-            statement5.textContent = "  -- cd: this command will allow you to go to a different directory. Use 'cd [foldername]' to go to that folder. Use 'cd ../' to go back the the parent directory.";
-            helpDiv.appendChild(statement5);
-
-            var statement5 = document.createElement('p');
-            statement5.textContent = "  -- cat: this command will allow you to display file contents. Use 'cat [filename]' to see the contents of that file.";
-            helpDiv.appendChild(statement5);
-
-            // Insert the div before the command-line div
-            terminalElement.insertBefore(helpDiv, terminalElement.querySelector('.command-line'));
+            // Generate help output and append it to the terminal
+            output = 
+            "These are the commands necessary to navigate the website:\n" +
+            "-- help: this command will let you know of the commands necessary to navigate the website.\n" +
+            "-- ls: this command will show you the files and folders in the current directory.\n" +
+            "-- clear: this command will clear the terminal screen.\n" +
+            "-- cd: this command will allow you to go to a different directory. Use 'cd [foldername]' to go to that folder. Use 'cd ../' to go back to the parent directory.\n" +
+            "-- cat: this command will allow you to display file contents. Use 'cat [filename]' to see the contents of that file.";
             break;
 
         case 'ls':
+            // Simulate the 'ls' command based on the directory
             switch (directory) {
-                case ' Projects':
-                    output = 'Intro.txt 2D-Design.txt Fabrication.txt Programming.txt 3D-Design.txt Inputs.txt Outputs.txt CNC.txt Networking.txt MachineBuilding.txt FinalProject.txt';
-                    break;
+                case '/Projects':
+                output = 'Intro.txt 2D-Design.txt Fabrication.txt Programming.txt 3D-Design.txt Inputs.txt Outputs.txt CNC.txt Networking.txt MachineBuilding.txt FinalProject.txt';
+                break;
                 default:
-                    output = 'Projects About.txt FinalProject.txt';
+                output = 'Projects About.txt FinalProject.txt';
             }
-             // Create a new paragraph element for the output
-            var outputParagraph = document.createElement('p');
-            outputParagraph.textContent = output;
-
-            // Insert the output paragraph before the command-line div
-            terminalElement.insertBefore(outputParagraph, terminalElement.querySelector('.command-line'));
-
-            // Update the current prompt with the command
-            currentPrompt.textContent += ` ${command}`;
             break;
         case 'cd':
-            switch (value) {
-                case 'Projects':
-                    // Update the current prompt and directory with the command
-                    currentPrompt.textContent += ` ${command} ${value}`;
-                    directory = ` ${value}`
-                    break;
-                case '../':
-                    // Update the current prompt and directory with the command
-                    currentPrompt.textContent += ` ${command} ${value}`;
-                    directory = ``
-                    break;
-                case '~':
-                    // Update the current prompt and directory with the command
-                    currentPrompt.textContent += ` ${command} ${value}`;
-                    directory = ``
-                    break;
-                default:
-                    output = 'Not a proper directory.'
-                    // Create a new paragraph element for the output
-                    const outputParagraph = document.createElement('p');
-                    outputParagraph.textContent = output;
-
-                    // Insert the output paragraph before the command-line div
-                    terminalElement.insertBefore(outputParagraph, terminalElement.querySelector('.command-line'));
-
-                    // Update the current prompt with the command
-                    currentPrompt.textContent += ` ${command} ${value}`;
-
+            // Simulate the 'cd' command
+            if (value === 'Projects') {
+                directory = '/Projects';
+            } else if (value === '../' || value === '~') {
+                directory = '';
+            } else {
+                output = 'Not a proper directory.';
             }
             break;
         case 'cat':
             switch (directory) {
-                case ' Projects':
+                case '/Projects':
                     switch (value) {
                         case 'Intro.txt':
                             // Create a new div for the content
@@ -269,39 +240,44 @@ commandInput.addEventListener('keydown', (event) => {
             }
 
             // Update the current prompt with the command
-            currentPrompt.textContent += ` ${command} ${value}`;
+            // currentPrompt.textContent += ` ${command} ${value}`;
             break;
         case 'clear':
-            // Remove all output paragraphs from the terminal
-            terminalElement.querySelectorAll('p, .about-div').forEach(element => element.remove());
-
-            // Update the current prompt with the command
-            currentPrompt.textContent += ` ${command}`;
+            // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div').forEach(element => element.remove());
+            output = '';
             break;
         default:
-            output = "Command not found. Try the 'help' command.";
-            // Create a new paragraph element for the output
-            outputParagraph = document.createElement('p');
-            outputParagraph.textContent = output;
-
-            // Insert the output paragraph before the command-line div
-            terminalElement.insertBefore(outputParagraph, terminalElement.querySelector('.command-line'));
-
-            // Update the current prompt with the command
-            currentPrompt.textContent += ` ${command}`;
+            output = `Command not found: ${command}. Try the 'help' command.`;
     }
 
-    // Create a new prompt for the next command
-    const newPrompt = document.createElement('p');
-    newPrompt.classList.add('newp');
-    newPrompt.textContent = `user@terminal${directory}:~`;
+    // Display the output of the command, if any
+    if (output !== '') {
+        const outputParagraph = document.createElement('p');
+        outputParagraph.classList.add('output-line');
+        outputParagraph.textContent = output;
+        terminalElement.insertBefore(outputParagraph, terminalElement.querySelector('.command-line'));
+      }
+  
+      // Update the prompt with the new command line
+      currentPrompt.textContent = `user@terminal${directory}:~`;  
+  }
+  // Handle up arrow key press to retrieve previous command
+  if (event.key === 'ArrowUp') {
+    if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+      historyIndex++;
+      commandInput.value = commandHistory[commandHistory.length - 1 - historyIndex]; // Set input value to previous command
+    }
+  }
 
-    // Insert the new prompt after the output paragraph, but before the command-line div
-    terminalElement.insertBefore(newPrompt, terminalElement.querySelector('.command-line'));
-
-    // Update the current prompt for the next command
-    currentPrompt = newPrompt;
-
-    commandInput.value = '';
+  // Handle down arrow key press to move forward in the command history
+  if (event.key === 'ArrowDown') {
+    if (historyIndex > 0) {
+      historyIndex--;
+      commandInput.value = commandHistory[commandHistory.length - 1 - historyIndex]; // Set input value to the next command
+    } else {
+      historyIndex = -1;
+      commandInput.value = '';  // Clear the input field if no more history is left
+    }
   }
 });
