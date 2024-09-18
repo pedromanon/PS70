@@ -144,12 +144,61 @@ commandInput.addEventListener('keydown', (event) => {
                             firstdraft.textContent = "For the first draft of my box, I decided to follow along with the example video on Panopto for how to design the 2D finger joint box. I had similar dimensions as the example video, but I chose to use a 4 finger joint and I added a lid to keep the things stored in the box safe.";
                             twoddesignDiv.appendChild(firstdraft);
 
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
                             // Create an image element
                             const image = document.createElement('img');
                             image.classList.add('firstdraft-img');
-                            image.src = 'Fingerbox-Sketch.png';
+                            image.src = 'Week2/Fingerbox-Sketch.png';
                             image.alt = 'First draft sketch of my box';
                             twoddesignDiv.appendChild(image);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            var firstprint = document.createElement('p');
+                            firstprint.textContent = "Using initial demensions of 100mm length, 40 mm width, 40 mm height, and 4.2mm thickness, I lasercut my box to check if the box would fit together.";
+                            twoddesignDiv.appendChild(firstprint);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            // Create a video element
+                            const video = document.createElement('video');
+                            video.classList.add('firstdraft-video');
+                            video.src = 'Week2/Firstdraft.MOV';
+                            video.type = 'video/quicktime';
+                            video.controls = true;
+                            video.alt = 'First draft lasercut of my box';
+                            twoddesignDiv.appendChild(video);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image2 = document.createElement('img');
+                            image2.classList.add('firstdraft-video');
+                            image2.src = 'Week2/Fingerjointfirstprint.png';
+                            image2.alt = 'First draft print of my box';
+                            twoddesignDiv.appendChild(image2);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            var finaldraft = document.createElement('p');
+                            finaldraft.textContent = "The first print went well, so I changed the parameters of my design to create a new box that had a length of 250mm, width of 175mm, height of 125mm, and thickness of 4.2mm with 4 fingerjoints.";
+                            twoddesignDiv.appendChild(finaldraft);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image3 = document.createElement('img');
+                            image3.classList.add('firstdraft-img');
+                            image3.src = 'Week2/Finalbox.png';
+                            image3.alt = 'Final sketch of my box';
+                            twoddesignDiv.appendChild(image3);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image4 = document.createElement('img');
+                            image4.classList.add('firstdraft-video');
+                            image4.src = 'Week2/Finalboxprint.png';
+                            image4.alt = 'Final print of my box';
+                            twoddesignDiv.appendChild(image4);
 
                             // Insert the div before the command-line div
                             terminalElement.insertBefore(twoddesignDiv, terminalElement.querySelector('.command-line'));
