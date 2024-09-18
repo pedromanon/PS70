@@ -171,6 +171,66 @@ commandInput.addEventListener('keydown', (event) => {
                             image4.alt = 'Final print of my box';
                             twoddesignDiv.appendChild(image4);
 
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            var assembly = document.createElement('p');
+                            assembly.textContent = "Everything wen't well, however, the scoring had gone through the box too much and I had to strenghten the box by using hot glue for the bending parts of the carboard. Also, while the fingerjoints were a good fit, they were not wide enough to hold the box together, so I had to use hot glue to keep the box from falling apart.";
+                            twoddesignDiv.appendChild(assembly);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image5 = document.createElement('img');
+                            image5.classList.add('firstdraft-video');
+                            image5.src = 'Week2/ClosedBox.png';
+                            image5.alt = 'The assembled closed box';
+                            twoddesignDiv.appendChild(image5);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image6 = document.createElement('img');
+                            image6.classList.add('firstdraft-video');
+                            image6.src = 'Week2/OpenBox.png';
+                            image6.alt = 'The assembled opened box';
+                            twoddesignDiv.appendChild(image6);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            var components = document.createElement('p');
+                            components.textContent = "For my components, I decided that I would measure and model a 2.5mm Allen Wrench and a 3mm x 70mm Socket Bolt. I used electronic calipers to take the measurements of the objects and modeled both of them independently in Fusion. Since this assignment asked us to create an assembly, I decided that the assembly of the two objects would be the combination of the wrench and bolt so that they were joined in the same way you would use the wrench to tighten the bolt. Below you can see the measurements and models of the objects.";
+                            twoddesignDiv.appendChild(components);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image7 = document.createElement('img');
+                            image7.classList.add('firstdraft-video');
+                            image7.src = 'Week2/Measurements.jpg';
+                            image7.alt = 'The measurments of my objects';
+                            twoddesignDiv.appendChild(image7);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image8 = document.createElement('img');
+                            image8.classList.add('firstdraft-img');
+                            image8.src = 'Week2/AllenWrench.png';
+                            image8.alt = 'Model of Allen Wrench';
+                            twoddesignDiv.appendChild(image8);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image9 = document.createElement('img');
+                            image9.classList.add('firstdraft-img');
+                            image9.src = 'Week2/SocketBolt.png';
+                            image9.alt = 'Model of Socket Bolt';
+                            twoddesignDiv.appendChild(image9);
+
+                            twoddesignDiv.appendChild(document.createElement('br'));
+
+                            const image10 = document.createElement('img');
+                            image10.classList.add('firstdraft-img');
+                            image10.src = 'Week2/AllenWrenchandBolt.png';
+                            image10.alt = 'Assembled model of Allen Wrench and Socket Bolt';
+                            twoddesignDiv.appendChild(image10);
+
                             // Insert the div before the command-line div
                             terminalElement.insertBefore(twoddesignDiv, terminalElement.querySelector('.command-line'));
 
