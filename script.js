@@ -196,7 +196,7 @@ commandInput.addEventListener('keydown', (event) => {
                             twoddesignDiv.appendChild(document.createElement('br'));
 
                             var components = document.createElement('p');
-                            components.textContent = "For my components, I decided that I would measure and model a 2.5mm Allen Wrench and a 3mm x 70mm Socket Bolt. I used electronic calipers to take the measurements of the objects and modeled both of them independently in Fusion. Since this assignment asked us to create an assembly, I decided that the assembly of the two objects would be the combination of the wrench and bolt so that they were joined in the same way you would use the wrench to tighten the bolt. Below you can see the measurements and models of the objects.";
+                            components.textContent = "For my components, I decided that I would measure and model a 2.5mm Allen Wrench and a 3mm x 70mm Socket Bolt. This was a convenient choice because I watched a Fusion tutorial on how to model an Allen Wrench and I just had to modify it to fit my desired size. I used electronic calipers to take the measurements of the objects and modeled both of them independently in Fusion. Since this assignment asked us to create an assembly, I decided that the assembly of the two objects would be the combination of the wrench and bolt so that they were joined in the same way you would use the wrench to tighten the bolt. Below you can see the measurements and models of the objects.";
                             twoddesignDiv.appendChild(components);
 
                             twoddesignDiv.appendChild(document.createElement('br'));
