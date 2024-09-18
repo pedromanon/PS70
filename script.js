@@ -308,7 +308,7 @@ commandInput.addEventListener('keydown', (event) => {
             output = '';
             break;
         default:
-            output = `Command not found: ${command}. Try the 'help' command.`;
+            output = `Command not found. Try the 'help' command.`;
     }
 
     // Display the output of the command, if any
