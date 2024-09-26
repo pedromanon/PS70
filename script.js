@@ -235,6 +235,97 @@ commandInput.addEventListener('keydown', (event) => {
                             terminalElement.insertBefore(twoddesignDiv, terminalElement.querySelector('.command-line'));
 
                             break;
+                        case 'Fabrication.txt':
+                            // Create a new div for the content
+                            var fabricationDiv = document.createElement('div');
+                            fabricationDiv.classList.add('fabrication-div');
+
+                            // Create paragraphs for the statements
+                            var sculptfirstdraft = document.createElement('p');
+                            sculptfirstdraft.textContent = "My initial idea was to make a music-box-esque kinetic sculpture that would have two wire figures with swords spinning in opposite directions and having their swords collide. To do this, I designed a small gear that was 43 mm in diameter and two large gears that were 91 mm in diameter. The large gear had 48 teeth and the small gear had 24. This means there is a 2:1 gear ratio between the large and small gears, so the large gears will spin twice as slowly as the small gear."
+                            fabricationDiv.appendChild(sculptfirstdraft);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            // Create an image element
+                            // var image = document.createElement('img');
+                            // image.classList.add('firstdraft-img');
+                            // image.src = 'Week3/Sculpture-Sketch.png';
+                            // image.alt = 'First draft sketch of my sculpture';
+                            // fabricationDiv.appendChild(image);
+
+                            // fabricationDiv.appendChild(document.createElement('br'));
+
+                            var sculptfirstprint = document.createElement('p');
+                            sculptfirstprint.textContent = "To house the moving portions of my sculpture, I decided to build a box. The box has a length of 250mm, a width of 120 mm, and a height of 40 mm. The thickness of the wood used for the box was 6.2 mm. The gears and the box were both cut from this wood."
+                            fabricationDiv.appendChild(sculptfirstprint);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            const sculptimage2 = document.createElement('img');
+                            sculptimage2.classList.add('firstdraft-img');
+                            sculptimage2.src = 'Week3/SculptureBox.png';
+                            sculptimage2.alt = 'First draft design of my box';
+                            fabricationDiv.appendChild(sculptimage2);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            // Create a video element
+                            const sculptvideo = document.createElement('video');
+                            sculptvideo.classList.add('firstdraft-video');
+                            sculptvideo.src = 'Week3/Firstdraft.MOV';
+                            sculptvideo.type = 'video/quicktime';
+                            sculptvideo.controls = true;
+                            sculptvideo.alt = 'First draft lasercut of my box and gears';
+                            fabricationDiv.appendChild(sculptvideo);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            var sculptfinaldraft = document.createElement('p');
+                            sculptfinaldraft.textContent = "The box and gears fit perfectly together, so I drilled holes into the gears and the box and started screwing them in. The larger gears weren't directly powered by the motor, so they could just hang loose on some axle. I chose a 3 mm x 35 mm bolt that would serve as the axle; I fastened it to the inside of the box using a wingnut. The axle of the small gear was a little trickier. I accidentally built the box so that its height was too constrictive, and the motor axle couldn't get a tight hold on the small gear. To fix the issue of connecting the small gear to the motor, I put a 3 mm x 18 mm bolt through the small gear, put a 12 mm wooden cylinder around the bolt, and put hot glue inside the cylinder while connecting the bolt and motor axle inside of it. This coupled both of them together."
+                            fabricationDiv.appendChild(sculptfinaldraft);
+
+                            // fabricationDiv.appendChild(document.createElement('br'));
+
+                            // var image3 = document.createElement('img');
+                            // image3.classList.add('firstdraft-img');
+                            // image3.src = 'Week3/InsideBox.png';
+                            // image3.alt = 'Inside of the box';
+                            // fabricationDiv.appendChild(image3);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            var sculptwires = document.createElement('p');
+                            sculptwires.textContent = "After securing the gears, I needed to make the figures with the swords. I used a metal wire and pliers to twist the wire into stick figures. Then, I made the figures a little sword to hold on to. I had to use some hot glue to make sure everything was secure, and once everything looked good, I glued each figure to one of the large gears."
+                            fabricationDiv.appendChild(sculptwires);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            const sculptimage4 = document.createElement('img');
+                            sculptimage4.classList.add('firstdraft-img');
+                            sculptimage4.src = 'Week3/NicePicture.png';
+                            sculptimage4.alt = 'Nice picture of the box';
+                            fabricationDiv.appendChild(sculptimage4);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            var sculptassembly = document.createElement('p');
+                            sculptassembly.textContent = "Everything looked good, so I glued the motor to the bottom of my box. The motor is a small 5V motor with a gearbox attached, however, it was still too big and the lid was a bit loose on the box. In the future, I should make the box about 5 to 10 mm taller. Either way, the sculpture moves."
+                            fabricationDiv.appendChild(sculptassembly);
+
+                            fabricationDiv.appendChild(document.createElement('br'));
+
+                            const sculptvideo2 = document.createElement('video');
+                            sculptvideo2.classList.add('firstdraft-video');
+                            sculptvideo2.src = 'Week3/Sculpture.MOV';
+                            sculptvideo2.type = 'video/quicktime';
+                            sculptvideo2.controls = true;
+                            sculptvideo2.alt = 'Video of the sculpture moving';
+                            fabricationDiv.appendChild(sculptvideo2);
+
+                            // Insert the div before the command-line div
+                            terminalElement.insertBefore(fabricationDiv, terminalElement.querySelector('.command-line'));
+                            break;
                         default:
                             output = 'Nothing in these files yet.'
 
@@ -304,7 +395,7 @@ commandInput.addEventListener('keydown', (event) => {
             break;
         case 'clear':
             // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
-            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div').forEach(element => element.remove());
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div').forEach(element => element.remove());
             output = '';
             break;
         default:
