@@ -248,13 +248,13 @@ commandInput.addEventListener('keydown', (event) => {
                             fabricationDiv.appendChild(document.createElement('br'));
 
                             // Create an image element
-                            // var image = document.createElement('img');
-                            // image.classList.add('firstdraft-img');
-                            // image.src = 'Week3/Sculpture-Sketch.png';
-                            // image.alt = 'First draft sketch of my sculpture';
-                            // fabricationDiv.appendChild(image);
+                            const sculptimage = document.createElement('img');
+                            sculptimage.classList.add('firstdraft-img');
+                            sculptimage.src = 'Week3/SculptureSketch.jpg';
+                            sculptimage.alt = 'First draft sketch of my sculpture';
+                            fabricationDiv.appendChild(sculptimage);
 
-                            // fabricationDiv.appendChild(document.createElement('br'));
+                            fabricationDiv.appendChild(document.createElement('br'));
 
                             var sculptfirstprint = document.createElement('p');
                             sculptfirstprint.textContent = "To house the moving portions of my sculpture, I decided to build a box. The box has a length of 250mm, a width of 120 mm, and a height of 40 mm. The thickness of the wood used for the box was 6.2 mm. The gears and the box were both cut from this wood."
@@ -285,13 +285,13 @@ commandInput.addEventListener('keydown', (event) => {
                             sculptfinaldraft.textContent = "The box and gears fit perfectly together, so I drilled holes into the gears and the box and started screwing them in. The larger gears weren't directly powered by the motor, so they could just hang loose on some axle. I chose a 3 mm x 35 mm bolt that would serve as the axle; I fastened it to the inside of the box using a wingnut. The axle of the small gear was a little trickier. I accidentally built the box so that its height was too constrictive, and the motor axle couldn't get a tight hold on the small gear. To fix the issue of connecting the small gear to the motor, I put a 3 mm x 18 mm bolt through the small gear, put a 12 mm wooden cylinder around the bolt, and put hot glue inside the cylinder while connecting the bolt and motor axle inside of it. This coupled both of them together."
                             fabricationDiv.appendChild(sculptfinaldraft);
 
-                            // fabricationDiv.appendChild(document.createElement('br'));
+                            fabricationDiv.appendChild(document.createElement('br'));
 
-                            // var image3 = document.createElement('img');
-                            // image3.classList.add('firstdraft-img');
-                            // image3.src = 'Week3/InsideBox.png';
-                            // image3.alt = 'Inside of the box';
-                            // fabricationDiv.appendChild(image3);
+                            const sculptimage3 = document.createElement('img');
+                            sculptimage3.classList.add('firstdraft-img');
+                            sculptimage3.src = 'Week3/InsideBox.png';
+                            sculptimage3.alt = 'Inside of the box';
+                            fabricationDiv.appendChild(sculptimage3);
 
                             fabricationDiv.appendChild(document.createElement('br'));
 
@@ -316,7 +316,7 @@ commandInput.addEventListener('keydown', (event) => {
                             fabricationDiv.appendChild(document.createElement('br'));
 
                             const sculptvideo2 = document.createElement('video');
-                            sculptvideo2.classList.add('firstdraft-video');
+                            sculptvideo2.classList.add('firstdraft-img');
                             sculptvideo2.src = 'Week3/Sculpture.MOV';
                             sculptvideo2.type = 'video/quicktime';
                             sculptvideo2.controls = true;
