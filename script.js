@@ -326,6 +326,63 @@ commandInput.addEventListener('keydown', (event) => {
                             // Insert the div before the command-line div
                             terminalElement.insertBefore(fabricationDiv, terminalElement.querySelector('.command-line'));
                             break;
+                        case 'Programming.txt':
+                            // Create a new div for the content
+                            var programmingDiv = document.createElement('div');
+                            programmingDiv.classList.add('programming-div');
+
+                            // Create paragraphs for the statements
+                            var prognewbox = document.createElement('p');
+                            prognewbox.textContent = "My idea was to modify my kinetic sculpture from last week and add a motor driver so that the motor could change directions. With this ability, I would programm a movement pattern that would make my wire figues appear as if they're actually fighting by having them change directions as they crossed blades. To do this, I first made the height of my box a little larger and made the walls 60 mm tall. This way, I could snugly fit all the components. Then, I laser cut some pieces of wood to hold down the motor in the center of the box. Other than that, the box stayed the exact same."
+                            programmingDiv.appendChild(prognewbox);
+
+                            programmingDiv.appendChild(document.createElement('br'));
+
+                            // Create an image element
+                            const progimage = document.createElement('img');
+                            progimage.classList.add('firstdraft-video');
+                            progimage.src = 'Week4/NewBox.png';
+                            progimage.alt = 'Picture of my new box';
+                            programmingDiv.appendChild(progimage);
+
+                            programmingDiv.appendChild(document.createElement('br'));
+
+                            var progcircuit = document.createElement('p');
+                            progcircuit.textContent = "As can be seen above, I added the L9110 motor driver to my circuit so the motor could change direction, then I connected the driver to the Arduino Uno, forming the circuit I would use for the project. Below I added a schematic of the full circuit."
+                            programmingDiv.appendChild(progcircuit);
+
+                            programmingDiv.appendChild(document.createElement('br'));
+
+                            // Create an image element
+                            const progimage2 = document.createElement('img');
+                            progimage2.classList.add('firstdraft-img');
+                            progimage2.src = 'Week4/CircuitSchematic.jpg';
+                            progimage2.alt = 'Circuit Schematic';
+                            programmingDiv.appendChild(progimage2);
+
+                            programmingDiv.appendChild(document.createElement('br'));
+
+                            var progcode = document.createElement('p');
+                            progcode.textContent = "I didn't have any sort of input device that would let me know the position of the gears, so if I wanted to have them change direction when they were in a specific position, I had to time how long it took the gears to spin 360 degrees and use that as a conversion between degrees and how long the motor should spin. Once I'd done this, I just needed to programm the pattern I wanted the sculpture to follow, which is exactly what I did. My code for making the sculpture move is found below."
+                            programmingDiv.appendChild(progcode);
+
+                            programmingDiv.appendChild(document.createElement('br'));
+
+                            // Add a code block for the 'print "hello world"' code
+                            var progcodeblock = document.createElement('pre');
+                            progcodeblock.classList.add('code-block');
+                            progcodeblock.textContent = `// Define pin connections\nconst int motorPinA = 3;  // Pin for B-1A (L9110 motor driver)\nconst int motorPinB = 4;  // Pin for B-1B (L9110 motor driver)\n\n// Set the time in milliseconds to complete one full 360-degree rotation\nconst int rotationDelay = 1300;  // Adjust this value based on the motor speed\n\nvoid setup() {\n  pinMode(motorPinA, OUTPUT);\n  pinMode(motorPinB, OUTPUT);\n\n  // Make sure the motor is off when the setup runs\n  stopMotor();\n\n  // Start serial communication for debugging\n  Serial.begin(9600);\n\n  delay(1000);\n}\n\nvoid loop() {\n  // Start the motor sequence in an infinite loop\n  performMotorMovements();\n}\n\nvoid performMotorMovements() {\n  // Spin motor 1125 degrees CW (3 full rotations + 45 degrees)\n  rotateMotorCW(1125);\n  \n  delay(500);\n  \n  // Turn motor CCW 90 degrees\n  rotateMotorCCW(90);\n  \n  delay(500);\n  \n  // Turn motor CW 90 degrees\n  rotateMotorCW(90);\n  \n  delay(500);\n  \n  // Turn motor CCW 90 degrees\n  rotateMotorCCW(90);\n  \n  delay(500);\n  \n  // Turn motor CW 90 degrees\n  rotateMotorCW(90);\n  \n  delay(500);\n  \n  // Turn motor CCW 1170 degrees (3 full rotations + 90 degrees)\n  rotateMotorCCW(1170);\n  \n  delay(500);\n  \n  // Turn motor CW 90 degrees\n  rotateMotorCW(90);\n  \n  delay(500);\n  \n  // Turn motor CCW 90 degrees\n  rotateMotorCCW(90);\n  \n  delay(500);\n  \n  // Turn motor CW 90 degrees\n  rotateMotorCW(90);\n  \n  delay(500);\n  \n  // Turn motor CCW 45 degrees\n  rotateMotorCCW(45);\n  \n  delay(500);\n}\n\n// Function to rotate the motor CW by a specified number of degrees\nvoid rotateMotorCW(int degrees) {\n  // Calculate the delay time based on the degrees to rotate\n  int delayTime = map(degrees, 0, 360, 0, rotationDelay);\n\n  // Set motor to turn CW\n  digitalWrite(motorPinA, HIGH);\n  digitalWrite(motorPinB, LOW);\n  \n  // Run the motor for the calculated time\n  delay(delayTime);\n  \n  stopMotor();\n  \n  Serial.print("Rotated CW: ");\n  Serial.print(degrees);\n  Serial.println(" degrees");\n}\n\n// Function to rotate the motor CCW by a specified number of degrees\nvoid rotateMotorCCW(int degrees) {\n  // Calculate the delay time based on the degrees to rotate\n  int delayTime = map(degrees, 0, 360, 0, rotationDelay);\n\n  // Set motor to turn CCW\n  digitalWrite(motorPinA, LOW);\n  digitalWrite(motorPinB, HIGH);\n  \n  // Run the motor for the calculated time\n  delay(delayTime);\n  \n  stopMotor();\n  \n  Serial.print("Rotated CCW: ");\n  Serial.print(degrees);\n  Serial.println(" degrees");\n}\n\n// Function to stop the motor\nvoid stopMotor() {\n  digitalWrite(motorPinA, LOW);\n  digitalWrite(motorPinB, LOW);\n}`;
+                            programmingDiv.appendChild(progcodeblock);
+
+                            programmingDiv.appendChild(document.createElement('br'));
+
+                            var progvideotext = document.createElement('p');
+                            progvideotext.textContent = "By uploading this code to my Arduino, I was able to make my sculpture move as I intended. The video of what this looks like can be found below."
+                            programmingDiv.appendChild(progvideotext);
+
+                            // Insert the div before the command-line div
+                            terminalElement.insertBefore(programmingDiv, terminalElement.querySelector('.command-line'));
+                            break;
                         default:
                             output = 'Nothing in these files yet.'
 
@@ -395,7 +452,7 @@ commandInput.addEventListener('keydown', (event) => {
             break;
         case 'clear':
             // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
-            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div').forEach(element => element.remove());
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div').forEach(element => element.remove());
             output = '';
             break;
         default:
