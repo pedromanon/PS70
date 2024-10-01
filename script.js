@@ -380,6 +380,17 @@ commandInput.addEventListener('keydown', (event) => {
                             progvideotext.textContent = "By uploading this code to my Arduino, I was able to make my sculpture move as I intended. The video of what this looks like can be found below."
                             programmingDiv.appendChild(progvideotext);
 
+                            programmingDiv.appendChild(document.createElement('br'));
+
+                            // Create a video element
+                            const progvideo = document.createElement('video');
+                            progvideo.classList.add('firstdraft-video');
+                            progvideo.src = 'Week4/ProgSculpt.MOV';
+                            progvideo.type = 'video/quicktime';
+                            progvideo.controls = true;
+                            progvideo.alt = 'Video of my kinetic sculpture with programmed movement';
+                            programmingDiv.appendChild(progvideo);
+
                             // Insert the div before the command-line div
                             terminalElement.insertBefore(programmingDiv, terminalElement.querySelector('.command-line'));
                             break;
@@ -446,13 +457,10 @@ commandInput.addEventListener('keydown', (event) => {
                             terminalElement.insertBefore(outputParagraph, terminalElement.querySelector('.command-line'));
                     }
             }
-
-            // Update the current prompt with the command
-            // currentPrompt.textContent += ` ${command} ${value}`;
             break;
         case 'clear':
             // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
-            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div').forEach(element => element.remove());
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .outputParagraph').forEach(element => element.remove());
             output = '';
             break;
         default:
