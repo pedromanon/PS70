@@ -395,6 +395,105 @@ commandInput.addEventListener('keydown', (event) => {
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(programmingDiv, terminalElement.querySelector('.command-line'));
                                 break;
+                            case '3D-Design.txt':
+                                // Create a new div for the content
+                                var threeddesignDiv = document.createElement('div');
+                                threeddesignDiv.classList.add('3ddesign-div');
+
+                                // Create paragraphs for the statements
+                                var threedscan = document.createElement('p');
+                                threedscan.textContent = "I used the LIDAR scanner in the lab to make a 3D mesh model of my airpods. I though it would be interesting to see how the scanner handled a small object that was very white and glossy. I had the adjust certain scanning parameters when making the 3D model, but the end result perfectly captured the subject."
+                                threeddesignDiv.appendChild(threedscan);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                // Create an image element
+                                const threedimage = document.createElement('img');
+                                threedimage.classList.add('firstdraft-img');
+                                threedimage.src = 'Week5/ScanPic.png';
+                                threedimage.alt = 'Scan of my airpods';
+                                threeddesignDiv.appendChild(threedimage);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                var threeddesign = document.createElement('p');
+                                threeddesign.textContent = "This week, I decided to design and 3D print a component that I will likely use in my final project. I designed and printed a rack and pinion. This will be the mechanism that will be used to pull my door open. I designed a base for the rack and pinion as well as the rack and pinion themselves all as different components in Fusion. Then I converted these components into stl files and used them all to 3D print the entire mechanism."
+                                threeddesignDiv.appendChild(threeddesign);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                const threedimage2 = document.createElement('img');
+                                threedimage2.classList.add('firstdraft-img');
+                                threedimage2.src = 'Week5/RaP_Model.png';
+                                threedimage2.alt = 'Model of the rack and pinion';
+                                threeddesignDiv.appendChild(threedimage2);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                var threedvideodoc = document.createElement('p');
+                                threedvideodoc.textContent = "Below is a video showing how the rack and pinion worked once printed and assembled."
+                                threeddesignDiv.appendChild(threedvideodoc);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                const threedvideo = document.createElement('video');
+                                threedvideo.classList.add('firstdraft-video');
+                                threedvideo.src = 'Week5/DesignTest.MOV';
+                                threedvideo.type = 'video/quicktime';
+                                threedvideo.controls = true;
+                                threedvideo.alt = 'Video of how my rack and pinion work';
+                                threeddesignDiv.appendChild(threedvideo);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                var stlbaseWrapper = document.createElement('div');
+                                stlbaseWrapper.classList.add('centered-link');
+                                var stlbaseLink = document.createElement('a');
+                                stlbaseLink.href = 'Week5/Base.stl';
+                                stlbaseLink.textContent = 'Download Rack and Pinion Base Component STL';
+                                stlbaseLink.download = 'Base.stl';
+                                stlbaseWrapper.appendChild(stlbaseLink);
+                                threeddesignDiv.appendChild(stlbaseWrapper);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                // Add STL file link for the gear
+                                var stlgearWrapper = document.createElement('div');
+                                stlgearWrapper.classList.add('centered-link');
+                                var stlgearLink = document.createElement('a');
+                                stlgearLink.href = 'Week5/Gear.stl';
+                                stlgearLink.textContent = 'Download Rack and Pinion Gear Component STL';
+                                stlgearLink.download = 'Gear.stl';
+                                stlgearWrapper.appendChild(stlgearLink);
+                                threeddesignDiv.appendChild(stlgearWrapper);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                // Add STL file link for the rack
+                                var stlrackWrapper = document.createElement('div');
+                                stlrackWrapper.classList.add('centered-link');
+                                var stlrackLink = document.createElement('a');
+                                stlrackLink.href = 'Week5/Rack.stl';
+                                stlrackLink.textContent = 'Download Rack and Pinion Rack Component STL';
+                                stlrackLink.download = 'Rack.stl';
+                                stlrackWrapper.appendChild(stlrackLink);
+                                threeddesignDiv.appendChild(stlrackWrapper);
+
+                                threeddesignDiv.appendChild(document.createElement('br'));
+
+                                // Add gCode file link for 3D Print of the Rack and Pinion
+                                var gcodeWrapper = document.createElement('div');
+                                gcodeWrapper.classList.add('centered-link');
+                                var gcodeLink = document.createElement('a');
+                                gcodeLink.href = 'Week5/RackAndPinion.gcode';
+                                gcodeLink.textContent = 'Download Rack and Pinion GCODE For 3D Printing';
+                                gcodeLink.download = 'RackAndPinion.gcode'; // Ensure the file is downloaded
+                                gcodeWrapper.appendChild(gcodeLink);
+                                threeddesignDiv.appendChild(gcodeWrapper);
+
+                                // Insert the div before the command-line div
+                                terminalElement.insertBefore(threeddesignDiv, terminalElement.querySelector('.command-line'));
+                                break;
                             default:
                                 output = 'Nothing in these files yet.'
                         }

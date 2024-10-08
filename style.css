@@ -96,3 +96,20 @@ p {
   overflow-x: auto;
   text-align: left;
 }
+
+.centered-link {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  margin: 10px 0;           /* Add margin for spacing */
+}
+
+.centered-link a {
+  color: #00ff00;           /* Match the green font color of the website */
+  text-decoration: none;    /* Remove underline from the link */
+  font-family: monospace;   /* Match the font style of the website */
+  font-size: 1.1em;         /* Adjust font size slightly */
+}
+
+.centered-link a:hover {
+  text-decoration: underline; /* Add underline on hover for better UX */
+}
