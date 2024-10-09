@@ -531,10 +531,40 @@ commandInput.addEventListener('keydown', (event) => {
                                 var projecttitle = document.createElement('p');
                                 projecttitle.textContent = "Final Project: Automatic Door Opener";
                                 finalDiv.appendChild(projecttitle);
+
+                                finalDiv.appendChild(document.createElement('br'));
     
                                 var projectdescription = document.createElement('p');
-                                projectdescription.textContent = "Create an automatic door opener that will unlock my dorm door through my phone and my Harvard ID. It will probably use some sort of motor to pull the handle of my dorm door.";
+                                projectdescription.textContent = "My idea is to create an automatic door opener that will unlock my dorm door through my phone and my Harvard ID. It will probably use some sort of motor to pull the handle of my dorm door.";
                                 finalDiv.appendChild(projectdescription);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var firstdesign = document.createElement('p');
+                                firstdesign.textContent = "Below is the initial design for the final project. It is currently a casing with a rack and pinion that will be controlled by a motor. The motor will cause the rack to pull down on the door handle, and after a few second pull it back up."
+                                finalDiv.appendChild(firstdesign);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                // Create an image element
+                                const v1design = document.createElement('img');
+                                v1design.classList.add('firstdraft-img');
+                                v1design.src = 'FinalProject/V1FinalProject.png';
+                                v1design.alt = 'Initial Design of the Final Project';
+                                finalDiv.appendChild(v1design);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var materials = document.createElement('p');
+                                materials.textContent = "Material List: Based on my initial design, it looks like what I'll need for the final project is a motor, filament to 3D print the components, a few screws to connect the case, a motor driver to make sure the motor can change direction, an RFID card reader so I can scan my Harvard ID, a bluetooth input device so I can also activate the device through an app, a microcontroller to give instructions to the motor and control the device, and some sort of battery so the device can be powered without having to be plugged into an outlet."
+                                finalDiv.appendChild(materials);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const timeline = document.createElement('p');
+                                timeline.classList.add('centered-text');
+                                timeline.textContent = "10/10/24: Finish the first draft of the project design\n10/17/24: Finalize the design of the project\n10/24/24: Have a working prototype that opens my door with a motor and a power source. No microcontroller or input devices\n10/31/24: Have a working card reader that recognizes my ID\n11/7/24: Connect the bluetooth input device to the system\n11/14/24: Build an app that connects to the device so I can open my door using my phone\n11/21/24: Find a way to power the device and recharge it if necessary\n12/5/24: Make sure everything is working and fix any issues if there are any"
+                                finalDiv.appendChild(timeline);
     
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(finalDiv, terminalElement.querySelector('.command-line'));
