@@ -576,7 +576,7 @@ commandInput.addEventListener('keydown', (event) => {
 
                                 const capacshematic = document.createElement('img');
                                 capacshematic.classList.add('firstdraft-img');
-                                capacshematic.src = 'Week6/Capacitanceschematic.png';
+                                capacshematic.src = 'Week6/Capacitanceschematic.jpg';
                                 capacshematic.alt = 'Capacitance schematic';
                                 inputsDiv.appendChild(capacshematic);
 
