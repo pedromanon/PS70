@@ -494,6 +494,73 @@ commandInput.addEventListener('keydown', (event) => {
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(threeddesignDiv, terminalElement.querySelector('.command-line'));
                                 break;
+                            case 'Inputs.txt':
+                                // Create a new div for the content
+                                var inputsDiv = document.createElement('div');
+                                inputsDiv.classList.add('inputs-div');
+
+                                // Create paragraphs for the statements
+                                var rfidinput = document.createElement('p');
+                                rfidinput.textContent = "For my input device, I decided to test out an RFID reader. Specifically, I used the MFRC-522 RFID reader and my Arduino Uno to create a circuit that scanned my Harvard ID, and flashed a light if the ID was properly scanned. Moreoever, I wrote an algorithm that would recognize only my ID."
+                                inputsDiv.appendChild(rfidinput);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                // Create an image element
+                                const rfidschematic = document.createElement('img');
+                                rfidschematic.classList.add('firstdraft-img');
+                                rfidschematic.src = 'Week6/InputSensorSchematic.jpg';
+                                rfidschematic.alt = 'RFID Schematic';
+                                inputsDiv.appendChild(rfidschematic);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                var rfidinputexplain = document.createElement('p');
+                                rfidinputexplain.textContent = "Below is a video of the circuit working as well as the code necessary to run this system yourself. Note that to run this code you have to download the following library:"
+                                inputsDiv.appendChild(rfidinputexplain);
+
+                                var rfidlibwrapper = document.createElement('div');
+                                var rfidlibLink = document.createElement('a');
+                                rfidlibLink.href = 'Week6/rfid-master.zip';
+                                rfidlibLink.textContent = 'MFRC-522 Arduino Library';
+                                rfidlibLink.download = 'rfid-master.zip';
+                                rfidlibwrapper.appendChild(rfidlibLink);
+                                inputsDiv.appendChild(rfidlibwrapper);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                const rfidinputvid = document.createElement('video');
+                                rfidinputvid.classList.add('firstdraft-video');
+                                rfidinputvid.src = 'Week6/rfidVid.MOV';
+                                rfidinputvid.type = 'video/quicktime';
+                                rfidinputvid.controls = true;
+                                rfidinputvid.alt = 'Video demo of the RFID Scanner';
+                                inputsDiv.appendChild(rfidinputvid);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                var rfidcodeblock = document.createElement('pre');
+                                rfidcodeblock.classList.add('code-block');
+                                rfidcodeblock.textContent = `#include <SPI.h>\n#include <MFRC522.h>\n\n#define SS_PIN 10\n#define RST_PIN 9\nconst int lightpin = 3;\nlong previousMillis = 0;        // will store last time LED was updated\n\n// the follow variables is a long because the time, measured in miliseconds,\n// will quickly become a bigger number than can be stored in an int.\nlong interval = 500;           // interval at which to blink (milliseconds)\n\nMFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.\n\nvoid setup() \n{\n  Serial.begin(9600);   // Initiate a serial communication\n  SPI.begin();      // Initiate  SPI bus\n  mfrc522.PCD_Init();   // Initiate MFRC522\n  pinMode(lightpin, OUTPUT);\n  Serial.println(\"Approximate your card to the reader...\");\n  Serial.println();\n}\n\nvoid loop() \n{\n  unsigned long currentMillis = millis();\n  if(currentMillis - previousMillis > interval) {\n    // save the last time you blinked the LED \n    previousMillis = currentMillis;\n    digitalWrite(lightpin, LOW);\n  }\n  // Look for new cards\n  if ( ! mfrc522.PICC_IsNewCardPresent()) \n  {\n    return;\n  }\n  // Select one of the cards\n  if ( ! mfrc522.PICC_ReadCardSerial()) \n  {\n    return;\n  }\n  // Only run the code below this line if a card is scanned\n  digitalWrite(lightpin, HIGH);\n  String content= \"\";\n  byte letter;\n  for (byte i = 0; i < mfrc522.uid.size; i++) \n  {\n     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \"));\n     content.concat(String(mfrc522.uid.uidByte[i], HEX));\n  }\n  Serial.println();\n  Serial.print(\"Message : \");\n  content.toUpperCase();\n  if (content.substring(1) == \"USER_ID\") //change UID of the cards that you want to access\n  {\n    Serial.println(\"Authorized access\");\n    Serial.println();\n    delay(500);\n  }\n else   {\n    Serial.println(\" Access denied\");\n    delay(500);\n  }\n}`
+                                inputsDiv.appendChild(rfidcodeblock);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                var rfidinputtest = document.createElement('p');
+                                rfidinputtest.textContent = "I decided to measure the distance at which the RFID scanner would read my card. The following graph shows what distance from the scanner the system read my card and the distance where it didn't."
+                                inputsDiv.appendChild(rfidinputtest);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                const rfidtestgraph = document.createElement('img');
+                                rfidtestgraph.classList.add('firstdraft-img');
+                                rfidtestgraph.src = 'Week6/RFIDGraph.png';
+                                rfidtestgraph.alt = 'Graph showing results of the scan range test';
+                                inputsDiv.appendChild(rfidtestgraph);
+
+                                // Insert the div before the command-line div
+                                terminalElement.insertBefore(inputsDiv, terminalElement.querySelector('.command-line'));
+                                break;
                             default:
                                 output = 'Nothing in these files yet.'
                         }
@@ -581,7 +648,7 @@ commandInput.addEventListener('keydown', (event) => {
             break;
         case 'clear':
             // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
-            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .outputParagraph').forEach(element => element.remove());
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .inputs-div, .outputParagraph').forEach(element => element.remove());
             output = '';
             break;
         default:
