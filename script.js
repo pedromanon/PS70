@@ -558,6 +558,41 @@ commandInput.addEventListener('keydown', (event) => {
                                 rfidtestgraph.alt = 'Graph showing results of the scan range test';
                                 inputsDiv.appendChild(rfidtestgraph);
 
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                var capacitanceexplanation = document.createElement('p');
+                                capacitanceexplanation.textContent = "For the capacitance portion of the assignment, I decided to test transmit-recieve sensing across different distances using two 5 x 10 mm sheets of copper. To collect data, I used the tx-rx algorithm which I will provide below."
+                                inputsDiv.appendChild(capacitanceexplanation);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                const capacpic = document.createElement('img');
+                                capacpic.classList.add('firstdraft-img');
+                                capacpic.src = 'Week6/Capacitanceimg.png';
+                                capacpic.alt = 'Image showing my setup for collecting capacitance data';
+                                inputsDiv.appendChild(capacpic);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                var capaccodeblock = document.createElement('pre');
+                                capaccodeblock.classList.add('code-block');
+                                capaccodeblock.textContent = `long result;\nint analog_pin = A3;\nint tx_pin = 4;\n\nvoid setup() {\n    pinMode(tx_pin, OUTPUT);\n    Serial.begin(9600);\n}\n\nvoid loop() {\n    result = tx_rx();\n    Serial.println(result);\n}\n\n\nlong tx_rx(){\n  int read_high;\n  int read_low;\n  int diff;\n  long int sum;\n  int N_samples = 100;\n\n  sum = 0;\n\n  for (int i = 0; i < N_samples; i++){\n   digitalWrite(tx_pin,HIGH);\n   read_high = analogRead(analog_pin);\n   delayMicroseconds(100);\n   digitalWrite(tx_pin,LOW);\n   read_low = analogRead(analog_pin);\n   diff = read_high - read_low;\n   sum += diff;\n }\n  return sum;\n}`
+                                inputsDiv.appendChild(capaccodeblock);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                var capacitanceresult = document.createElement('p');
+                                capacitanceresult.textContent = "The results of my test show that using transmit-recieve sensing is a very good way to monitor contact between objects. If I set a certain threshold, I could detect contact between moving parts such as the rack and base of my final project to tell the motor to stop running when the rack has touched the base. Below you can see the results of my data collection."
+                                inputsDiv.appendChild(capacitanceresult);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
+                                const capacgraph = document.createElement('img');
+                                capacgraph.classList.add('firstdraft-img');
+                                capacgraph.src = 'Week6/Capacitancegraph.png';
+                                capacgraph.alt = 'Graph showing results of trasnmit-recieve sensing test';
+                                inputsDiv.appendChild(capacgraph);
+                                
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(inputsDiv, terminalElement.querySelector('.command-line'));
                                 break;
