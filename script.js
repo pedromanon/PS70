@@ -574,6 +574,14 @@ commandInput.addEventListener('keydown', (event) => {
 
                                 inputsDiv.appendChild(document.createElement('br'));
 
+                                const capacshematic = document.createElement('img');
+                                capacshematic.classList.add('firstdraft-img');
+                                capacshematic.src = 'Week6/Capacitanceschematic.png';
+                                capacshematic.alt = 'Capacitance schematic';
+                                inputsDiv.appendChild(capacshematic);
+
+                                inputsDiv.appendChild(document.createElement('br'));
+
                                 var capaccodeblock = document.createElement('pre');
                                 capaccodeblock.classList.add('code-block');
                                 capaccodeblock.textContent = `long result;\nint analog_pin = A3;\nint tx_pin = 4;\n\nvoid setup() {\n    pinMode(tx_pin, OUTPUT);\n    Serial.begin(9600);\n}\n\nvoid loop() {\n    result = tx_rx();\n    Serial.println(result);\n}\n\n\nlong tx_rx(){\n  int read_high;\n  int read_low;\n  int diff;\n  long int sum;\n  int N_samples = 100;\n\n  sum = 0;\n\n  for (int i = 0; i < N_samples; i++){\n   digitalWrite(tx_pin,HIGH);\n   read_high = analogRead(analog_pin);\n   delayMicroseconds(100);\n   digitalWrite(tx_pin,LOW);\n   read_low = analogRead(analog_pin);\n   diff = read_high - read_low;\n   sum += diff;\n }\n  return sum;\n}`
