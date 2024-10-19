@@ -604,6 +604,59 @@ commandInput.addEventListener('keydown', (event) => {
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(inputsDiv, terminalElement.querySelector('.command-line'));
                                 break;
+                            case "Outputs.txt":
+                                // Create a new div for the content
+                                var outputsDiv = document.createElement('div');
+                                outputsDiv.classList.add('outputs-div');
+
+                                // Create paragraphs for the statements
+                                var outputsintro = document.createElement('p');
+                                outputsintro.textContent = "For my outpit device, I decided to test out an RFID reader in conjunction with the motor I will use for my final project. Specifically, I used the MFRC-522 RFID reader, my Arduino Uno, a L9110 Motor Driver, and a micro DC motor to create a circuit that scanned my Harvard ID, and made my motor spin CCW then CW when it was properly scanned. Moreoever, I wrote an algorithm that would recognize only my ID to do this."
+                                outputsDiv.appendChild(outputsintro);
+
+                                outputsDiv.appendChild(document.createElement('br'));
+
+                                // Create an image element
+                                const outputschematic = document.createElement('img');
+                                outputschematic.classList.add('firstdraft-img');
+                                outputschematic.src = 'Week7/OutputSchematic.jpg';
+                                outputschematic.alt = 'Output Device Schematic';
+                                outputsDiv.appendChild(outputschematic);
+
+                                outputsDiv.appendChild(document.createElement('br'));
+
+                                var outputexplain = document.createElement('p');
+                                outputexplain.textContent = "Below is a video of the circuit working as well as the code necessary to run this system yourself. Note that to run this code you have to download the following library:"
+                                outputsDiv.appendChild(outputexplain);
+
+                                var outputlibwrapper = document.createElement('div');
+                                var outputlibLink = document.createElement('a');
+                                outputlibLink.href = 'Week6/rfid-master.zip';
+                                outputlibLink.textContent = 'MFRC-522 Arduino Library';
+                                outputlibLink.download = 'rfid-master.zip';
+                                outputlibwrapper.appendChild(outputlibLink);
+                                outputsDiv.appendChild(outputlibwrapper);
+
+                                outputsDiv.appendChild(document.createElement('br'));
+
+                                const outputvid = document.createElement('video');
+                                outputvid.classList.add('firstdraft-video');
+                                outputvid.src = 'Week7/Outputvid.MOV';
+                                outputvid.type = 'video/quicktime';
+                                outputvid.controls = true;
+                                outputvid.alt = 'Video demo of the RFID Scanner and motor';
+                                outputsDiv.appendChild(outputvid);
+
+                                outputsDiv.appendChild(document.createElement('br'));
+
+                                var outputcodeblock = document.createElement('pre');
+                                outputcodeblock.classList.add('code-block');
+                                outputcodeblock.textContent = `#include <SPI.h>\n#include <MFRC522.h>\n\n#define SS_PIN 10\n#define RST_PIN 9\nconst int A1A = 3;\nconst int A1B = 4;\n\nlong previousMillis = 0;\nlong motorStartTime = 0;\nlong motorInterval = 30000;\nbool motorRunning = false;\nbool motorDirection = true; // false = CW, true = CCW\n\nMFRC522 mfrc522(SS_PIN, RST_PIN);\n\nvoid setup() {\n  Serial.begin(9600);\n  SPI.begin();\n  mfrc522.PCD_Init();\n  pinMode(A1A, OUTPUT);\n  pinMode(A1B, OUTPUT);\n  Serial.println("Approximate your card to the reader...");\n  Serial.println();\n}\n\nvoid loop() {\n  unsigned long currentMillis = millis();\n\n  // Look for new cards\n  if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial() && !motorRunning) {\n    String content= "";\n    byte letter;\n    for (byte i = 0; i < mfrc522.uid.size; i++) \n    {\n      content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));\n      content.concat(String(mfrc522.uid.uidByte[i], HEX));\n    }\n    Serial.println();\n    Serial.print("Message : ");\n    content.toUpperCase();\n    if (content.substring(1) == "USER_ID")\n    {\n      Serial.println("Authorized access");\n      Serial.println();\n      motorRunning = true;\n      motorStartTime = currentMillis;\n      motorDirection = true;\n      runMotor(motorDirection);\n    }\n    else {\n      Serial.println(" Access denied");\n    }\n  }\n\n  if (motorRunning) {\n    if (currentMillis - motorStartTime >= motorInterval) {\n      motorDirection = !motorDirection;\n      motorStartTime = currentMillis;\n      runMotor(motorDirection);\n\n      if (motorDirection == true) {\n        motorRunning = false;  \n        stopMotor();\n        Serial.println("Motor sequence complete.");\n      }\n    }\n  }\n}\n\nvoid runMotor(bool direction) {\n  if (direction) {\n    // Run motor CCW\n    analogWrite(A1A, 255);\n    digitalWrite(A1B, LOW);\n    Serial.println("Motor running CCW.");\n  } else {\n    // Run motor CW\n    analogWrite(A1A, 0);\n    digitalWrite(A1B, HIGH);\n    Serial.println("Motor running CW.");\n  }\n}\n\nvoid stopMotor() {\n  analogWrite(A1A, 0);\n  digitalWrite(A1B, LOW);\n  Serial.println("Motor stopped.");\n}`
+                                outputsDiv.appendChild(outputcodeblock);
+                                
+                                // Insert the div before the command-line div
+                                terminalElement.insertBefore(outputsDiv, terminalElement.querySelector('.command-line'));
+                                break;
                             default:
                                 output = 'Nothing in these files yet.'
                         }
@@ -691,7 +744,7 @@ commandInput.addEventListener('keydown', (event) => {
             break;
         case 'clear':
             // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
-            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .inputs-div, .outputParagraph').forEach(element => element.remove());
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .inputs-div, .outputs-div, .outputParagraph').forEach(element => element.remove());
             output = '';
             break;
         default:
