@@ -679,6 +679,44 @@ commandInput.addEventListener('keydown', (event) => {
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(outputsDiv, terminalElement.querySelector('.command-line'));
                                 break;
+                            case "CNC.txt":
+                                // Create a new div for the content
+                                var cncDiv = document.createElement('div');
+                                cncDiv.classList.add('cnc-div');
+
+                                // Create paragraphs for the statements
+                                var cncintro = document.createElement('p');
+                                cncintro.textContent = "This week I intended to try making gears for my final project by using CNC and molding, however, this proved problematic due to my limitations in materials and the limitations of the CNC itself. I first tried to test if I could CNC the smallest gear in my gear train. I used 10 mm HDPD, but I only needed a 5 mm thick gear, so I tried to mill out the first 5 mm of the material using a pocket cut and then do a regular perimeter cut for the rest fo the material. This did not work well as you can see with the result below."
+                                cncDiv.appendChild(cncintro);
+
+                                cncDiv.appendChild(document.createElement('br'));
+
+                                const cncvid = document.createElement('video');
+                                cncvid.classList.add('firstdraft-img');
+                                cncvid.src = 'Week8/cnc.MOV';
+                                cncvid.type = 'video/quicktime';
+                                cncvid.controls = true;
+                                cncvid.alt = 'Video of the CNC process';
+                                cncDiv.appendChild(cncvid);
+
+                                cncDiv.appendChild(document.createElement('br'));
+
+                                // Create an image element
+                                const cncpic = document.createElement('img');
+                                cncpic.classList.add('firstdraft-img');
+                                cncpic.src = 'Week8/cnc.png';
+                                cncpic.alt = 'Picture of the CNC output';
+                                cncDiv.appendChild(cncpic);
+
+                                cncDiv.appendChild(document.createElement('br'));
+
+                                var outputexplain = document.createElement('p');
+                                outputexplain.textContent = "For some reason, the pocket cut did not completely cut the entire face of the material, so the resulting gear was still 10 mm thick, it just so happened that the top 5 mm had a larger hole in the center."
+                                cncDiv.appendChild(outputexplain);
+                                
+                                // Insert the div before the command-line div
+                                terminalElement.insertBefore(cncDiv, terminalElement.querySelector('.command-line'));
+                                break;
                             default:
                                 output = 'Nothing in these files yet.'
                         }
@@ -766,7 +804,7 @@ commandInput.addEventListener('keydown', (event) => {
             break;
         case 'clear':
             // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
-            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .inputs-div, .outputs-div, .outputParagraph').forEach(element => element.remove());
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .inputs-div, .outputs-div, .cnc-div, .outputParagraph').forEach(element => element.remove());
             output = '';
             break;
         default:
