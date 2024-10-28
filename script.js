@@ -713,6 +713,44 @@ commandInput.addEventListener('keydown', (event) => {
                                 var outputexplain = document.createElement('p');
                                 outputexplain.textContent = "For some reason, the pocket cut did not completely cut the entire face of the material, so the resulting gear was still 10 mm thick, it just so happened that the top 5 mm had a larger hole in the center."
                                 cncDiv.appendChild(outputexplain);
+
+                                cncDiv.appendChild(document.createElement('br'));
+
+                                var moldintro = document.createElement('p');
+                                moldintro.textContent = "For post-processing, I decided to test the details possible when vacuum forming. CNCing some new gears is definitely still a possibility, but I wanted to see if vacuum forming could create a mold I could use to create more gears out of resin. For the purposes of my experiment, I made a mold of different gears and used DryStone casting to make a replica of these components."
+                                cncDiv.appendChild(moldintro);
+
+                                cncDiv.appendChild(document.createElement('br'));
+
+                                const vacuumpic = document.createElement('img');
+                                vacuumpic.classList.add('firstdraft-img');
+                                vacuumpic.src = 'Week8/vacuum.png';
+                                vacuumpic.alt = 'Picture of the vacuum forming';
+                                cncDiv.appendChild(vacuumpic);
+
+
+                                cncDiv.appendChild(document.createElement('br'));
+
+                                // Create an image element
+                                const plasterpic = document.createElement('img');
+                                plasterpic.classList.add('firstdraft-img');
+                                plasterpic.src = 'Week8/plaster.png';
+                                plasterpic.alt = 'Picture of the DryStone casting';
+                                cncDiv.appendChild(plasterpic);
+
+                                cncDiv.appendChild(document.createElement('br'));
+
+                                var moldoutput = document.createElement('p');
+                                moldoutput.textContent = "To be continued..."
+                                cncDiv.appendChild(moldoutput);
+
+                                // cncDiv.appendChild(document.createElement('br'));
+
+                                // const castingpic = document.createElement('img');
+                                // castingpic.classList.add('firstdraft-img');
+                                // castingpic.src = 'Week8/result.png';
+                                // castingpic.alt = 'Picture of the casting results';
+                                // cncDiv.appendChild(castingpic);
                                 
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(cncDiv, terminalElement.querySelector('.command-line'));
