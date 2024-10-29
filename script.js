@@ -741,16 +741,16 @@ commandInput.addEventListener('keydown', (event) => {
                                 cncDiv.appendChild(document.createElement('br'));
 
                                 var moldoutput = document.createElement('p');
-                                moldoutput.textContent = "To be continued..."
+                                moldoutput.textContent = "When the casting was taken out of the mold, it became clear that using vacuum forming to create a mold of something as precise as a gear or rack would not be a good idea, but I was honestly surprised by the fact that you could still see the individual teeth on the gears when they were only a few millimeters long. All in all, I will not be using vacuum forming for faster manufacturing of my gears, but it was still a good learning experience nonetheless."
                                 cncDiv.appendChild(moldoutput);
 
-                                // cncDiv.appendChild(document.createElement('br'));
+                                cncDiv.appendChild(document.createElement('br'));
 
-                                // const castingpic = document.createElement('img');
-                                // castingpic.classList.add('firstdraft-img');
-                                // castingpic.src = 'Week8/result.png';
-                                // castingpic.alt = 'Picture of the casting results';
-                                // cncDiv.appendChild(castingpic);
+                                const castingpic = document.createElement('img');
+                                castingpic.classList.add('firstdraft-img');
+                                castingpic.src = 'Week8/result.png';
+                                castingpic.alt = 'Picture of the casting results';
+                                cncDiv.appendChild(castingpic);
                                 
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(cncDiv, terminalElement.querySelector('.command-line'));
