@@ -777,6 +777,28 @@ commandInput.addEventListener('keydown', (event) => {
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(networkingDiv, terminalElement.querySelector('.command-line'));
                                 break;
+                            case "MachineBuilding.txt":
+                                // Create a new div for the content
+                                var machinebuildingDiv = document.createElement('div');
+                                machinebuildingDiv.classList.add('machinebuilding-div');
+
+                                // Create paragraphs for the statements
+                                var machinebuildingintro = document.createElement('p');
+                                machinebuildingintro.textContent = "The assignment for this week had me work with Aiyanna Ojukwu and Yaying Liang Li. The details for the assingment can be found in Aiyanna's website:"
+                                machinebuildingDiv.appendChild(machinebuildingintro);
+
+                                var machinebuildingwrapper = document.createElement('div');
+                                var machinebuildingLink = document.createElement('a');
+                                machinebuildingLink.href = 'https://yanyans360.github.io/PHYS70-2024-Aiyanna/10_machine/index.html';
+                                machinebuildingLink.textContent = 'here';
+                                machinebuildingwrapper.appendChild(machinebuildingLink);
+                                machinebuildingDiv.appendChild(machinebuildingwrapper);
+
+                                machinebuildingDiv.appendChild(document.createElement('br'));
+                                
+                                // Insert the div before the command-line div
+                                terminalElement.insertBefore(machinebuildingDiv, terminalElement.querySelector('.command-line'));
+                                break;
                             default:
                                 output = 'Nothing in these files yet.'
                         }
@@ -864,7 +886,7 @@ commandInput.addEventListener('keydown', (event) => {
             break;
         case 'clear':
             // Clear all dynamically generated content (old command lines, outputs, and cat-generated content)
-            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .inputs-div, .outputs-div, .cnc-div, .networking-div, .outputParagraph').forEach(element => element.remove());
+            terminalElement.querySelectorAll('.old-command-line, .output-line, .twoddesign-div, .finalproject-div, .about-div, .fabrication-div, .programming-div, .inputs-div, .outputs-div, .cnc-div, .networking-div, .machinebuilding-div, .outputParagraph').forEach(element => element.remove());
             output = '';
             break;
         default:
