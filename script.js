@@ -51,7 +51,7 @@ commandInput.addEventListener('keydown', (event) => {
             // Simulate the 'ls' command based on the directory
             switch (directory) {
                 case '/Projects':
-                output = 'Intro.txt 2D-Design.txt Fabrication.txt Programming.txt 3D-Design.txt Inputs.txt Outputs.txt CNC.txt Networking.txt MachineBuilding.txt FinalProject.txt';
+                output = 'Intro.txt 2D-Design.txt Fabrication.txt Programming.txt 3D-Design.txt Inputs.txt Outputs.txt CNC.txt Networking.txt MachineBuilding.txt';
                 break;
                 default:
                 output = 'Projects About.txt FinalProject.txt';
@@ -800,7 +800,7 @@ commandInput.addEventListener('keydown', (event) => {
                                 terminalElement.insertBefore(machinebuildingDiv, terminalElement.querySelector('.command-line'));
                                 break;
                             default:
-                                output = 'Nothing in these files yet.'
+                                output = 'This is not a recognized file.'
                         }
                         break;
                     default:
