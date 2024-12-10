@@ -870,6 +870,150 @@ commandInput.addEventListener('keydown', (event) => {
                                 timeline.classList.add('centered-text');
                                 timeline.textContent = "10/10/24: Finish the first draft of the project design\n10/17/24: Finalize the design of the project\n10/24/24: Have a working prototype that opens my door with a motor and a power source. No microcontroller or input devices\n10/31/24: Have a working card reader that recognizes my ID\n11/7/24: Connect the bluetooth input device to the system\n11/14/24: Build an app that connects to the device so I can open my door using my phone\n11/21/24: Find a way to power the device and recharge it if necessary\n12/5/24: Make sure everything is working and fix any issues if there are any"
                                 finalDiv.appendChild(timeline);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var seconddesign = document.createElement('p');
+                                seconddesign.textContent = "Below is my second design for the final project. I needed to expand upon the rack and pinion idea and add a gear train to it because the 6V 500 RPM micro DC motor I planned to use did not have enough torque to turn my door handle. So, for my new design I added the gear train and some holes I would eventually use for screws for the casing of my device. With this design, I 3D printed an early model to test out."
+                                finalDiv.appendChild(seconddesign);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const v2design = document.createElement('img');
+                                v2design.classList.add('firstdraft-img');
+                                v2design.src = 'FinalProject/V2FinalProject.png';
+                                v2design.alt = 'Second Design of the Final Project';
+                                finalDiv.appendChild(v2design);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var rfidupdate = document.createElement('p');
+                                rfidupdate.textContent = "After a few weeks of work, I was struggling to make the RFID work, as you can see below, I was able to succesfully mmake the RFID scanner read my college ID and activate the rack and pinion, however, I was eventually forced to drop the RFID component of my final project, because the scanner would have to be on the opposite side of the door as my ID, and since the scanner range was 3 cm but my door is 5 cm, no manner of strategy could get the scanner to pick up my ID through the door."
+                                finalDiv.appendChild(rfidupdate);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const rfidupdatevid = document.createElement('video');
+                                rfidupdatevid.classList.add('firstdraft-video');
+                                rfidupdatevid.src = 'FinalProject/RFIDRackPinion.MOV';
+                                rfidupdatevid.type = 'video/quicktime';
+                                rfidupdatevid.controls = true;
+                                rfidupdatevid.alt = 'Video demo of the RFID Scanner and motor';
+                                finalDiv.appendChild(rfidupdatevid);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var bluetoothupdate = document.createElement('p');
+                                bluetoothupdate.textContent = "As I moved on to the bluetooth component of my project, I chose to work with a XIAO-ESP32C3 as my microcontroller because it could connect to both bluetooth and wifi. However, I changed my mind and decided not to use bluetooth as the way my phone would control the door opening device. My reasoning for this was because every time I would need to open my door, I'd first have to connect it to bluetooth which seems like too much of a hassle. Instead, I decided to build a remote Firebase server and have the microcontroller connect to Harvards wifi and respond to changes made on the Firebase database through wifi. So, I used online tutorials to help me make a Firebase account, and then deployed a web application using firebase to send a value to a Firebase database and, after a few seconds, clear that value. I planned for this value to be the one the ESP32 looked for when turning on the motor. Below you can see the code for my web application to control the motor."
+                                finalDiv.appendChild(bluetoothupdate);
+
+                                finalDiv.appendChild(document.createElement('br'));
+    
+                                var firebaseapplicationblock = document.createElement('pre');
+                                firebaseapplicationblock.classList.add('code-block');
+                                firebaseapplicationblock.textContent = `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>\n  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>\n  <title>Motor Control</title>\n</head>\n<body>\n  <h1>Motor Control</h1>\n  <button onclick="sendStartCommand()">Start Motor Sequence</button>\n\n  <script>\n    // Your Firebase config\n    const firebaseConfig = {\n      apiKey: "Personal Info",\n      authDomain: "Personal Info",\n      databaseURL: "Personal Info",\n      projectId: "Personal Info",\n      storageBucket: "Personal Info",\n      messagingSenderId: "Personal Info",\n      appId: "Personal Info",\n      measurementId: "Personal Info"\n    };\n\n    // Initialize Firebase\n    firebase.initializeApp(firebaseConfig);\n    const database = firebase.database();\n\n    function sendStartCommand() {\n      // Update the database with the "start" command\n      database.ref('motorControl').update({ command: "start" })\n        .then(() => {\n          console.log("Start command sent successfully.");\n          resetCommandWithRetry(); // Attempt to reset after sending the start command\n        })\n        .catch((error) => {\n          alert("Error sending start command: " + error.message);\n        });\n    }\n\n    function resetCommandWithRetry(maxRetries = 5, retryDelay = 1000) {\n      let retries = 0;\n\n      function attemptReset() {\n        database.ref('motorControl').update({ command: "" })\n          .then(() => {\n            console.log("Command reset to empty successfully.");\n          })\n          .catch((error) => {\n            console.error("Error resetting command: " + error.message);\n            if (retries < maxRetries) {\n              retries++;\n              console.log(\`Retrying reset... Attempt \${retries}/\${maxRetries}\`);\n              setTimeout(attemptReset, retryDelay); // Retry after delay\n            } else {\n              alert("Failed to reset command after multiple attempts.");\n            }\n          });\n      }\n\n      // Start the reset process with a delay\n      setTimeout(attemptReset, 5000); // Initial 5-second delay\n    }\n  </script>\n</body>\n</html>`
+                                finalDiv.appendChild(firebaseapplicationblock);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var esp32codeupdate = document.createElement('p');
+                                esp32codeupdate.textContent = "After setting up the firebase application, I made a new sketch to add the code necessary to remotely activate and control the motor. The idea behind this sketch is to remotely connect to the Firebase database, and then turn the motor CW then CCW for 20 and 17 seconds respectively (the reasoning behind the time differences is because the door handle spring will pull the motor CCW so I didn't need to motor to do as much work in that direction). There are a few delays placed around the sketch, but that is so the microcontroller doesn't have to be connected to wifi at these points and use up more power than necessary. This sketch can be found below."
+                                finalDiv.appendChild(esp32codeupdate);
+
+                                finalDiv.appendChild(document.createElement('br'));
+    
+                                var esp32codeblock = document.createElement('pre');
+                                esp32codeblock.classList.add('code-block');
+                                esp32codeblock.textContent = `#include <WiFi.h>\n#include <FirebaseESP32.h>\n#include <Wire.h>\n\n// Motor control pins\n#define A1A 3\n#define A1B 5\n\n// Firebase configuration\nFirebaseConfig config;\nFirebaseAuth auth;\n\n// Wi-Fi credentials\nconst char* ssid = "Harvard University";\n\n// Motor timing\nconst long motorInterval = 20000; // 20 seconds\nbool motorRunning = false;\nbool motorDirection; // false = CCW, true = CW\n\n// Firebase object\nFirebaseData fbData;\n\nvoid connectToWiFi() {\n  Serial.print("Connecting to Wi-Fi");\n  WiFi.begin(ssid);\n  while (WiFi.status() != WL_CONNECTED) {\n    delay(500); // Check Wi-Fi status every 500ms\n    Serial.print(".");\n  }\n  WiFi.setSleep(true); // Enable low-power Wi-Fi sleep mode\n  Serial.println("\\nConnected to Wi-Fi");\n}\n\nvoid connectToFirebase() {\n  config.host = "Personal Info";\n  config.signer.tokens.legacy_token = "Personal Info";\n  Firebase.begin(&config, &auth);\n  Firebase.reconnectWiFi(true); // Automatically reconnect if Wi-Fi disconnects\n  Serial.println("Connected to Firebase");\n\n  // Start a Firebase stream to listen for database changes\n  if (!Firebase.beginStream(fbData, "/motorControl/command")) {\n    Serial.println("Failed to start Firebase stream.");\n    Serial.println(fbData.errorReason());\n  } else {\n    Serial.println("Firebase stream started.");\n  }\n}\n\nvoid handleFirebaseStream() {\n  // Process the Firebase stream\n  if (Firebase.readStream(fbData)) {\n    if (fbData.streamTimeout()) {\n      Serial.println("Stream timeout, reconnecting...");\n      Firebase.beginStream(fbData, "/motorControl/command");\n    } else if (fbData.streamAvailable()) {\n      String command = fbData.stringData();\n      Serial.printf("Command received: %s\\n", command.c_str());\n\n      if (command == "start" && !motorRunning) {\n        Serial.println("Starting motor sequence...");\n        startMotorSequence();\n        Firebase.setString(fbData, "/motorControl/command", ""); // Clear command\n      }\n    }\n  } else {\n    Serial.printf("Stream error: %s\\n", fbData.errorReason().c_str());\n  }\n}\n\nvoid startMotorSequence() {\n  motorRunning = true;\n  motorDirection = true; // Start CW\n  runMotor(motorDirection);\n}\n\nvoid runMotor(bool direction) {\n  if (direction) {\n    // Run motor CW\n    digitalWrite(A1A, LOW);\n    digitalWrite(A1B, HIGH);\n    Serial.println("Motor running CW.");\n    delay(motorInterval); // Keep motor running for the specified interval\n  } else {\n    // Run motor CCW\n    digitalWrite(A1A, HIGH);\n    digitalWrite(A1B, LOW);\n    Serial.println("Motor running CCW.");\n    delay(motorInterval - 3000); // Keep motor running for the specified interval\n  }\n}\n\nvoid stopMotor() {\n  digitalWrite(A1A, LOW);\n  digitalWrite(A1B, LOW);\n  Serial.println("Motor stopped.");\n}\n\nvoid handleMotorSequence() {\n  if (motorRunning) {\n    if (motorDirection) {\n      // Switch to CCW after CW completes\n      motorDirection = !motorDirection;\n      runMotor(motorDirection);\n    } else {\n      // Stop after CCW completes\n      motorRunning = false;\n      stopMotor();\n      Serial.println("Motor sequence complete.");\n    }\n  }\n}\n\nvoid setup() {\n  Serial.begin(9600);\n  Wire.begin();\n  pinMode(A1A, OUTPUT);\n  pinMode(A1B, OUTPUT);\n\n  stopMotor(); // Ensure motor is off at startup\n\n  connectToWiFi();\n  connectToFirebase();\n\n  Serial.println("Setup complete. Waiting for commands or RFID scans.");\n}\n\nvoid loop() {\n  handleFirebaseStream(); // Check and handle Firebase stream\n  handleMotorSequence();  // Handle motor operations\n  delay(10); // Minimal delay to reduce CPU usage during idle periods\n}`
+                                finalDiv.appendChild(esp32codeblock);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var powersource = document.createElement('p');
+                                powersource.textContent = "I wanted the door opening device to have a self contained power source, so I decided to use a 13000mAh portable battery as my power source. In order to make sure this battery could be recharged, I made and 3D printed the housing for it , the motor, and the other electrical components of my project. Within this housing, I left space open for a micro usb adapter I would use to recharge the portable battery without having to open the device. This housing can be seen below."
+                                finalDiv.appendChild(powersource);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const electronichousing = document.createElement('img');
+                                electronichousing.classList.add('firstdraft-img');
+                                electronichousing.src = 'FinalProject/ElectronicHousing.png';
+                                electronichousing.alt = 'The design for the electronic housing';
+                                finalDiv.appendChild(electronichousing);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var powersourcetwo = document.createElement('p');
+                                powersourcetwo.textContent = "Since, I'm using a 13000mAh portable battery I should be able to use the door opener without charging it for about 10 days because on average, the microcontroller is operating at 50mA. This is a perfectly reasonable amount that I am hapy with, and the reason why I tried to reduce power consumption in my microcontroller code. The last thing I needed to do was design a lid for the housing of the device which would allow for hex nuts to be inserted so that screws could fasten everything together. The design for this lid can be seen below. I will also add links to download all components as STL Files."
+                                finalDiv.appendChild(powersourcetwo);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const lid = document.createElement('img');
+                                lid.classList.add('firstdraft-img');
+                                lid.src = 'FinalProject/Lid.png';
+                                lid.alt = 'The design for the lid';
+                                finalDiv.appendChild(lid);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var stlgearbaseWrapper = document.createElement('div');
+                                stlgearbaseWrapper.classList.add('centered-link');
+                                var stlgearbaseLink = document.createElement('a');
+                                stlgearbaseLink.href = 'FinalProject/FinalProject.zip';
+                                stlgearbaseLink.textContent = 'Download All STL Files for Final Project';
+                                stlgearbaseLink.download = 'FinalProject.zip.stl';
+                                stlgearbaseWrapper.appendChild(stlgearbaseLink);
+                                finalDiv.appendChild(stlgearbaseWrapper);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var electroniccomponents = document.createElement('p');
+                                electroniccomponents.textContent = "With these files, you can 3D print all of my components, however, there are some electronic components necessary to replicate this project:"
+                                finalDiv.appendChild(electroniccomponents);
+
+                                const eccomponents = document.createElement('p');
+                                eccomponents.classList.add('centered-text');
+                                eccomponents.textContent = "6V 500 RPM Micro DC Motor\nL9110 Motor Driver\nXIAO-ESP32C3\nAnker PowerCore 13000mAh, Compact 3-Port Ultra-Portable Phone Charger Power Bank\nSplitter Adapter Micro USB Female to USBC Male + Type-C Male Cable Extension\nUSB to USB-C Cable"
+                                finalDiv.appendChild(eccomponents);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var layout = document.createElement('p');
+                                layout.textContent = "Below is a picture of the electronic components, however, I will explain the electrical connections. Both of the cables are connected to the portable charger, the female end of the Micro USB cable should be fit through the rectangular hole of the electronic housing to provide power to the protable charger. The USB cable should also be connected to the charger and the USB-C end should be connected to the XIAO-ESP32C3 to power it. The L9110 motor driver should be attached to the XIAO with pins 3 and 5 being the data pins of the motor driver. Finally, the motor driver should be attached to the motor."
+                                finalDiv.appendChild(layout);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const electronics1 = document.createElement('img');
+                                electronics1.classList.add('firstdraft-img');
+                                electronics1.src = 'FinalProject/Electronics1.png';
+                                electronics1.alt = 'An image of the electronic connections';
+                                finalDiv.appendChild(electronics1);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const electronics2 = document.createElement('img');
+                                electronics2.classList.add('firstdraft-img');
+                                electronics2.src = 'FinalProject/Electronics2.png';
+                                electronics2.alt = 'An image of the electronic connections';
+                                finalDiv.appendChild(electronics2);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                var demo = document.createElement('p');
+                                demo.textContent = "When everything is printed and put together, I use 4 50mm screws to put everything together. I attach them from the gear housing component into the hex nuts on the lid component. When everything is tightened I attach command strips to the lid and press the lid to the surface of the door. With that, I can send a signal to the micro controller through the Firebase application. A demo of this process is below."
+                                finalDiv.appendChild(demo);
+
+                                finalDiv.appendChild(document.createElement('br'));
+
+                                const finalviddemo = document.createElement('video');
+                                finalviddemo.classList.add('firstdraft-img');
+                                finalviddemo.src = 'FinalProject/FinalDemo.mp4';
+                                finalviddemo.type = 'video/mp4';
+                                finalviddemo.controls = true;
+                                finalviddemo.alt = 'Video demo of the final project';
+                                finalDiv.appendChild(finalviddemo);
     
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(finalDiv, terminalElement.querySelector('.command-line'));
