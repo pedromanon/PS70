@@ -1002,7 +1002,7 @@ commandInput.addEventListener('keydown', (event) => {
                                 finalDiv.appendChild(document.createElement('br'));
 
                                 var demo = document.createElement('p');
-                                demo.textContent = "When everything is printed and put together, I use 4 50mm screws to put everything together. I attach them from the gear housing component into the hex nuts on the lid component. When everything is tightened I attach command strips to the lid and press the lid to the surface of the door. With that, I can send a signal to the micro controller through the Firebase application. A demo of this process is below."
+                                demo.textContent = "When everything is printed and put together, I use 4 50mm screws to put everything together. I attach them from the gear housing component into the hex nuts on the lid component. When everything is tightened I attach command strips to the lid and press the lid to the surface of the door. With that, I can send a signal to the micro controller through the Firebase application. A demo of this process is below:"
                                 finalDiv.appendChild(demo);
 
                                 finalDiv.appendChild(document.createElement('br'));
