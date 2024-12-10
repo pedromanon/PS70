@@ -62,6 +62,15 @@
   width: 40%;
 }
 
+.youtube-vid {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%; /* Match the width of the images */
+  height: 60%;
+  object-fit: cover; /* Ensures the video or image scales nicely */
+}
+
 .firstdraft-video {
   display: block;
   margin-left: auto;
@@ -123,3 +132,11 @@ p {
   margin: 0 auto; /* Center the block itself */
 }
 
+.firstdraft-video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%; /* Adjust to match the desired width */
+  aspect-ratio: 16 / 9; /* Maintain the YouTube video aspect ratio */
+  max-width: 100%; /* Ensure responsiveness */
+}

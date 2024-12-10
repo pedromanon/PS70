@@ -1007,14 +1007,13 @@ commandInput.addEventListener('keydown', (event) => {
 
                                 finalDiv.appendChild(document.createElement('br'));
 
-                                const finalviddemo = document.createElement('video');
-                                finalviddemo.classList.add('firstdraft-img');
-                                finalviddemo.src = 'FinalProject/FinalDemo.mp4';
-                                finalviddemo.type = 'video/mp4';
+                                const finalviddemo = document.createElement('iframe');
+                                finalviddemo.classList.add('youtube-vid');
+                                finalviddemo.src = 'https://www.youtube.com/embed/RvDx-3yCOfQ';
                                 finalviddemo.controls = true;
                                 finalviddemo.alt = 'Video demo of the final project';
                                 finalDiv.appendChild(finalviddemo);
-    
+
                                 // Insert the div before the command-line div
                                 terminalElement.insertBefore(finalDiv, terminalElement.querySelector('.command-line'));
                                 
