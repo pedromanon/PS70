@@ -67,7 +67,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 40%; /* Match the width of the images */
-  height: 60%;
+  height: 400px;
   object-fit: cover; /* Ensures the video or image scales nicely */
 }
 
